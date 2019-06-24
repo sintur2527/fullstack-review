@@ -11,18 +11,23 @@ app.post('/repos', function(req, res) {
   // This route should take the github username provided
   // and get the repo information from the github API, then
   // save the repo information in the database
+  console.log('req.body', req.body);
   const { username } = req.body;
-  getRepos(username, ({ id, name, description, url, forks }) => {
-    forks = forks || 0;
-    db.save({ id, name, description, url, forks });
+  getRepos(username, (err, data) => {
+    if (err) {
+      console.error(err);
+    }
+    db.save(data);
+    res.sendStatus(200);
   });
-  res.send();
 });
 
 app.get('/repos', function(req, res) {
   // TODO - your code here!
   // This route should send back the top 25 repos
-  db.get();
+  db.get().then(resp => {
+    res.send(resp).sendStatus(200);
+  });
 });
 
 let port = 1128;

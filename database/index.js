@@ -18,8 +18,10 @@ let save = data => {
   Repo.create(data);
 };
 
-let get = data => {
-  Repo.find(data);
+let get = () => {
+  return Repo.find()
+    .limit(25)
+    .sort({ forks: -1 });
 };
 
 module.exports.save = save;

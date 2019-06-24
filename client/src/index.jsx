@@ -23,11 +23,12 @@ class App extends React.Component {
 
   search(term) {
     console.log(`${term} was searched`);
-    Axios.post('/repos');
+    Axios.post('/repos', {
+      username: term,
+    });
   }
 
   render() {
-    console.log('this.state.repos', this.state.repos);
     return (
       <div>
         <h1>Github Fetcher</h1>
