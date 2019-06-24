@@ -12,20 +12,31 @@ class App extends React.Component {
     this.state = {
       repos: [],
     };
+    this.updateRepos = this.updateRepos.bind(this);
+  }
+
+  updateRepos() {
+    Axios.get('/repos')
+      .then(({ data }) => {
+        this.setState({
+          repos: data,
+        });
+      })
+      .catch(err => {
+        console.error(err);
+      });
   }
 
   componentDidMount() {
-    Axios.get('/repos').then(({ data }) => {
-      this.setState({
-        repos: data,
-      });
-    });
+    this.updateRepos();
   }
 
   search(term) {
     console.log(`${term} was searched`);
-    Axios.post('/repos', {
+    return Axios.post('/repos', {
       username: term,
+    }).then(() => {
+      this.setState();
     });
   }
 
@@ -34,7 +45,10 @@ class App extends React.Component {
       <div>
         <h1>Github Fetcher</h1>
         <RepoList repos={this.state.repos} />
-        <Search onSearch={this.search.bind(this)} />
+        <Search
+          onSearch={this.search.bind(this)}
+          handleSubmit={this.updateRepos}
+        />
         <RepoBox repos={this.state.repos} />
       </div>
     );
