@@ -8,7 +8,7 @@ let repoSchema = mongoose.Schema({
   id: { type: Number, unique: true },
   name: String,
   description: String,
-  url: String,
+  html_url: String,
   forks: Number,
 });
 
