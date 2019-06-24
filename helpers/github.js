@@ -19,8 +19,8 @@ let getReposByUsername = (user, callback) => {
     if (err) {
       return console.error('get failed: ', err);
     }
-    console.log('Get successful! Server responded with: ', JSON.parse(body));
-    callback(JSON.parse(body));
+    // console.log('Get successful! Server responded with: ', JSON.parse(body));
+    callback(null, JSON.parse(body));
   });
 };
 
