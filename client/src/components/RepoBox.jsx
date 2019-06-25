@@ -8,10 +8,10 @@ export default class RepoBox extends Component {
   render() {
     return (
       <div className="col-md-5">
-        <h4>Top Repos:</h4>
+        <h4>Top 25 Repos:</h4>
         <ol>
           {this.props.repos.map(repo => (
-            <RepoBoxEntry key={repo.id} name={repo.name} url={repo.html_url} />
+            <RepoBoxEntry key={repo.id} name={repo.name} url={repo.url} />
           ))}
         </ol>
       </div>

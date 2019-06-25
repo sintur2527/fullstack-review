@@ -1,29 +1,44 @@
 const mongoose = require('mongoose');
-mongoose.Promise = require('bluebird');
 
 let url = process.env.MONGODB_URI || 'mongodb://localhost/fetcher';
+
 mongoose.connect(url, {
   useMongoClient: true,
 });
 
 let repoSchema = mongoose.Schema({
-  id: { type: Number, unique: true },
+  id: { type: String, unique: true },
   name: String,
   description: String,
-  html_url: String,
+  url: String,
   forks: Number,
 });
 
 let Repo = mongoose.model('Repo', repoSchema);
 
 let save = data => {
-  Repo.create(data);
+  return Promise.all(
+    data.map(repo => {
+      return Repo.findOneAndUpdate(
+        { id: repo.id },
+        {
+          id: repo.id,
+          name: repo.name,
+          description: repo.description,
+          url: repo.html_url,
+          forks: repo.forks,
+        },
+        { upsert: true }
+      );
+    })
+  );
 };
 
 let get = () => {
   return Repo.find()
+    .sort('-forks')
     .limit(25)
-    .sort({ forks: -1 });
+    .exec();
 };
 
 module.exports.save = save;

@@ -9,7 +9,9 @@ export default class RepoBoxEntry extends Component {
     return (
       <div>
         <li>
-          <a href={this.props.url}>{this.props.name}</a>
+          <a href={this.props.url} target="_blank">
+            {this.props.name}
+          </a>
         </li>
       </div>
     );

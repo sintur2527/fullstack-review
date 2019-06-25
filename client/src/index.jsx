@@ -16,8 +16,25 @@ class App extends React.Component {
     this.updateRepos = this.updateRepos.bind(this);
   }
 
+  componentDidMount() {
+    this.updateRepos();
+  }
+
+  search(term) {
+    console.log(`${term} was searched`);
+    Axios.post('/repos', {
+      username: term,
+    })
+      .then(() => {
+        return this.updateRepos();
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
   updateRepos() {
-    Axios.get('/repos')
+    return Axios.get('/repos')
       .then(({ data }) => {
         this.setState({
           repos: data,
@@ -26,19 +43,6 @@ class App extends React.Component {
       .catch(err => {
         console.error(err);
       });
-  }
-
-  componentDidMount() {
-    this.updateRepos();
-  }
-
-  search(term) {
-    console.log(`${term} was searched`);
-    return Axios.post('/repos', {
-      username: term,
-    }).then(() => {
-      this.setState();
-    });
   }
 
   render() {
@@ -50,7 +54,7 @@ class App extends React.Component {
             onSearch={this.search.bind(this)}
             handleSubmit={this.updateRepos}
           />
-          <RepoList repos={this.state.repos} />
+          {/* <RepoList repos={this.state.repos} /> */}
         </div>
         <div className="row">
           <RepoBox repos={this.state.repos} />
