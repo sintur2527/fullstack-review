@@ -58,7 +58,7 @@ class App extends React.Component {
         </div>
         <div className="row">
           <RepoBox repos={this.state.repos} />
-          <UserBox />
+          {/* <UserBox /> */}
         </div>
       </div>
     );

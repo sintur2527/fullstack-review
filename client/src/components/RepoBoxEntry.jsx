@@ -8,10 +8,14 @@ export default class RepoBoxEntry extends Component {
   render() {
     return (
       <div>
-        <li>
+        <li className="list-group-item d-flex justify-content-between align-items-center">
+          {this.props.owner}
           <a href={this.props.url} target="_blank">
             {this.props.name}
           </a>
+          <span className="badge badge-primary badge-pill">
+            {this.props.forks}
+          </span>
         </li>
       </div>
     );

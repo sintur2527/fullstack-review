@@ -8,6 +8,7 @@ mongoose.connect(url, {
 
 let repoSchema = mongoose.Schema({
   id: { type: String, unique: true },
+  owner: String,
   name: String,
   description: String,
   url: String,
@@ -23,6 +24,7 @@ let save = data => {
         { id: repo.id },
         {
           id: repo.id,
+          owner: repo.owner.login,
           name: repo.name,
           description: repo.description,
           url: repo.html_url,
