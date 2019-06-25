@@ -27,8 +27,17 @@ class Search extends React.Component {
       <div>
         <h4>Add more repos!</h4>
         Enter a github username:{' '}
-        <input value={this.state.terms} onChange={this.onChange} />
-        <button onClick={this.search}> Add Repos </button>
+        <form className="form-inline">
+          <input
+            value={this.state.terms}
+            onChange={this.onChange}
+            className="form-control mb-2 mr-sm-2"
+          />
+          <button onClick={this.search} className="btn btn-dark mb-2">
+            {' '}
+            Add Repos{' '}
+          </button>
+        </form>
       </div>
     );
   }

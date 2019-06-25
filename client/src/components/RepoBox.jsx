@@ -7,7 +7,7 @@ export default class RepoBox extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="col-md-5">
         <h4>Top Repos:</h4>
         <ol>
           {this.props.repos.map(repo => (
