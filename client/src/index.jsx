@@ -5,6 +5,7 @@ import Search from './components/Search.jsx';
 import RepoList from './components/RepoList.jsx';
 import Axios from 'axios';
 import RepoBox from './components/RepoBox.jsx';
+import UserBox from './components/UserBox.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -45,18 +46,15 @@ class App extends React.Component {
       <div>
         <h1>Github Fetcher</h1>
         <div className="row">
-          <div className="col-md-8">
-            <Search
-              onSearch={this.search.bind(this)}
-              handleSubmit={this.updateRepos}
-            />
-          </div>
-          <div className="col-md-4">
-            <RepoList repos={this.state.repos} />
-          </div>
+          <Search
+            onSearch={this.search.bind(this)}
+            handleSubmit={this.updateRepos}
+          />
+          <RepoList repos={this.state.repos} />
         </div>
         <div className="row">
           <RepoBox repos={this.state.repos} />
+          <UserBox />
         </div>
       </div>
     );

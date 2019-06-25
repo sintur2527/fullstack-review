@@ -24,7 +24,7 @@ class Search extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="col-md-5">
         <h4>Add more repos!</h4>
         Enter a github username:{' '}
         <form className="form-inline">
